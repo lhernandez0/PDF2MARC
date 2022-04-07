@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PDF to MARC</title>
+
+  <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  //  Dropzone object
+  Dropzone.options.myDropzone = {
+    // Prevents Dropzone from uploading dropped files immediately
+    autoProcessQueue: false,
+    addRemoveLinks: true,
+    uploadMultiple: true,
+    parallelUploads: 20,
+    maxFiles: 20,
+    maxFilesize: 50,
+    dictDefaultMessage: "Drop pdf files here or click to upload.",
+    init: function() {
+      myDropzone = this; // closure
+
+      this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        myDropzone.processQueue();
+      });
+
+      this.on("error", function(file, response) {
+        // do stuff here.
+        $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(response.description);
+      });
+
+      this.on("complete", function(file, response){
+        console.log(file.name)
+        file._removeLink.remove()
+        // If all uploads are complete
+        var a = document.createElement('a');
+        a.setAttribute('href',"/download/"+ session_id + "/" + file.name);
+        a.setAttribute('class', 'dz-remove')
+        a.innerHTML = "Download MARC";
+        file.previewTemplate.appendChild(a);
+        if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+          var a = document.createElement('a');
+          a.setAttribute('href',"/download/"+ session_id);
+          a.innerHTML = "Download zip";
+          this.appendChild(a);
+        }
+      });
+      this.on("success", function(file, response) {
+        // Handle the responseText here. For example,
+        // add the text to the preview element:
+        // file.previewTemplate.appendChild(document.createTextNode(response));
+        // console.log(response)
+      });
+      this.on("sending", function(file) {
+        $(".dz-remove").html("");
+        // this.addRemoveLinks: False
+      });
+    }
+  };
+  var session_id
+  function generate_session_id(){
+    session_id = Math.floor(Math.random() * Date.now())
+    console.log("Generated session_id: " + session_id)
+    document.getElementById('session_id').value=session_id
+  };
+  </script>
+
+  <style>
+  .dropzone {
+    box-shadow: 0px 2px 20px 0px #f2f2f2;
+    border: 1px dashed #c0ccda;
+    padding: 60x;
+    border-radius: 10px;
+    background-color: #fbfdff;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+
+  </style>
+</head>
+
+<body onload="generate_session_id()">
+  <section class="bg-light mt-5">
+    <div class="container"></div>
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="form-wrapper py-5">
+          <form action="/" class="dropzone" id="my-dropzone" method="POST">
+            <div class="form-group">
+              <button type="submit">Submit</button>
+            </div>
+            <div class="form-group">
+              <input type="hidden" name="session_id" id="session_id" class="form-control" required/>
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
