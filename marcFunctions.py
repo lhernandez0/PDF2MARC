@@ -78,7 +78,7 @@ def load_entity_patterns():
     patterns_dict = dict()
     entity_patterns_path = os.path.join(os.getcwd(),'entity_patterns')
     for file in os.listdir(entity_patterns_path):
-        file = os.path.join('.\entity_patterns',file)
+        file = os.path.join(entity_patterns_path,file)
         if file.endswith('.yaml'):
             with open(file, "r", encoding="utf-8") as f:
                 try:
