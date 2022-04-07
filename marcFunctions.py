@@ -76,14 +76,15 @@ def spacy_model(model_name):
 
 def load_entity_patterns():
     patterns_dict = dict()
-    for file in os.listdir('.\entity_patterns'):
+    entity_patterns_path = os.path.join(os.getcwd(),'entity_patterns')
+    for file in os.listdir(entity_patterns_path):
         file = os.path.join('.\entity_patterns',file)
         if file.endswith('.yaml'):
             with open(file, "r", encoding="utf-8") as f:
                 try:
                     file_dict = yaml.safe_load(f)
                     patterns_dict.update(file_dict)
-                    # print(f"{file} loaded")
+                    print(f"{file} loaded")
                 except yaml.YAMLError as exc:
                     print(f"{file} failed to load")
     # print(patterns_dict)
@@ -98,7 +99,7 @@ def load_entity_patterns():
 
 def load_document_pattern():
     document_dict = dict()
-    file = os.path.join(r'.\document_patterns', 'document_config.yaml')
+    file = os.path.join(os.getcwd(),'document_patterns', 'document_config.yaml')
     with open(file, "r", encoding="utf-8") as f:
         try:
             document_dict = yaml.safe_load(f)
