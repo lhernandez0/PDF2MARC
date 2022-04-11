@@ -21,7 +21,8 @@ app.config['UPLOAD_FOLDER'] = "uploads"
 
 @app.errorhandler(400)
 def custom400(error):
-    return error.description, 400
+    # return error.description, 400
+    return render_template('400.html', error = error)
 
 @app.errorhandler(413)
 def too_large(e):
@@ -32,7 +33,7 @@ def csrf_error(e):
     return e.description, 400
 
 @app.route('/')
-def index(download_url = None):
+def index():
     return render_template('index.html')
 
 @app.route('/download/', defaults={'session_id' : None, 'file_name' : None})
@@ -103,5 +104,5 @@ def upload_file():
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    # app.run(host="0.0.0.0", port="4000",debug=True)
-    app.run()
+    app.run(host="0.0.0.0", port="4000",debug=True)
+    # app.run(host="0.0.0.0", port="4000")

@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>PDF to MARC</title>
+{% extends 'base.html' %}
 
-  <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
+{% block scripts %}
+<script type="text/javascript">
   //  Dropzone object
   Dropzone.options.myDropzone = {
     // Prevents Dropzone from uploading dropped files immediately
@@ -84,27 +75,25 @@
   }
 
   </style>
-</head>
+{% endblock %}
 
-<body onload="generate_session_id()">
-  <section class="bg-light mt-5">
-    <div class="container"></div>
-    <div class="row">
-      <div class="col-lg-8 offset-lg-2">
-        <div class="form-wrapper py-5">
-          <form action="/" class="dropzone" id="my-dropzone" method="POST">
-            <div class="form-group">
-              <button type="submit">Submit</button>
-            </div>
-            <div class="form-group">
-              <input type="hidden" name="session_id" id="session_id" class="form-control" required/>
-              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            </div>
-          </form>
-        </div>
+{% block body_attrs %}  onload="generate_session_id()" {% endblock %}
+{% block content %}
+<section class="bg-light mt-5">
+  <div class="container"></div>
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="form-wrapper py-5">
+        <form action="/" class="dropzone" id="my-dropzone" method="POST">
+          <div class="form-group">
+            <button type="submit">Submit</button>
+          </div>
+          <div class="form-group">
+            <input type="hidden" name="session_id" id="session_id" class="form-control" required/>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          </div>
+        </form>
       </div>
-    </div>
-  </div>
-</section>
-</body>
-</html>
+    </section>
+    <p>lorem ipsum</p>
+{% endblock %}
