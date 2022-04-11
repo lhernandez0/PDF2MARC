@@ -15,12 +15,13 @@
 
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/811a699953.js" crossorigin="anonymous"></script>
-  
+
   {% block scripts %}
   {% endblock %}
 </head>
 <body {% block body_attrs %}{% endblock %}>
   {% include 'navbar.html' %}
+  <br>
   <div class = "container">
     {% block content %}
 
