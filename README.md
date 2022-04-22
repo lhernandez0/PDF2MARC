@@ -24,7 +24,7 @@ Or using the python interpreter
 import nltk
 nltk.download('all')
 ```
-Installation notes may be found [in the faq](####installation-notes).
+Installation notes may be found [in the faq](#installation-notes).
 ### FAQ
 #### Why "PDF2MARC"?
 PDF2MARC began as an ambitious project for automatic cataloging of any electronic document, especially monographs. Due to practical limitations, I had to limit the prototype to cataloging documents that are diverse enough to be worth automatically cataloging, but structured and predictable enough to design a system for, thus, theses and dissertations.
