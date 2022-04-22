@@ -5,9 +5,9 @@ Automatic cataloging of Theses and Dissertations in RDA MARC21 records.
 Download the source code using git or as a zip.
 ```bash
 # Git
-git clone https://github.com/<YOUR-USERNAME>/PDF2MARC
+git clone https://github.com/lhernandez0/PDF2MARC
 # Github client
-gh repo clone <YOUR-USERNAME>/PDF2MARC
+gh repo clone lhernandez0/PDF2MARC
 ```
 Move to do the directory and install requirements using pip.
 ```bash
