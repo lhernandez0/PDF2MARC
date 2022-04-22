@@ -22,9 +22,9 @@ python3 -m nltk.downloader all
 Or using the python interpreter
 ```python
 import nltk
-nltk.download('punkt')
+nltk.download('all')
 ```
-
+Installation notes may be found [in the faq](####Installation notes).
 ### FAQ
 #### Why "PDF2MARC"?
 PDF2MARC began as an ambitious project for automatic cataloging of any electronic document, especially monographs. Due to practical limitations, I had to limit the prototype to cataloging documents that are diverse enough to be worth automatically cataloging, but structured and predictable enough to design a system for, thus, theses and dissertations.
